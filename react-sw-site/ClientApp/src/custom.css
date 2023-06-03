@@ -1,0 +1,49 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.suggestions-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.error-message {
+    color: red;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .suggestion-item:hover {
+        background-color: #f2f2f2;
+    }
+
+    .suggestion-item:first-child {
+        border-top: none;
+    }
+
+    .suggestion-item:last-child {
+        border-bottom: none;
+    }
