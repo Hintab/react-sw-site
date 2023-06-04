@@ -1,5 +1,5 @@
 import MapContainer from "./components/MapContainer";
-import { FetchData } from "./components/FetchData";
+import ServiceTag from "./components/AddServiceTag";
 import { Home } from "./components/Home";
 import AutoAddressMap from "./components/InputData";
 
@@ -13,8 +13,8 @@ const AppRoutes = [
     element: <MapContainer />
   },
   {
-      path: '/fetch-data',
-      element: <FetchData />
+      path: '/ServiceTags',
+      element: <ServiceTag />
   },
   {
       path: '/test',

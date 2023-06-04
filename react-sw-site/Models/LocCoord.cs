@@ -11,5 +11,11 @@ namespace react_sw_site.Models
         public string? Longitude { get; set; }
         
         public string? Loc_Name { get; set; }
+
+        public string? Loc_Address { get; set; }
+
+        public string? Phone_Num { get; set; }
+
+        public string? Service_Tags { get; set; }
     }
 }

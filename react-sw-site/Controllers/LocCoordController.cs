@@ -44,6 +44,9 @@ namespace react_sw_site.Controllers
             existingLocCoord.Latitude = locCoord.Latitude;
             existingLocCoord.Longitude = locCoord.Longitude;
             existingLocCoord.Loc_Name = locCoord.Loc_Name;
+            existingLocCoord.Loc_Address = locCoord.Loc_Address;
+            existingLocCoord.Phone_Num = locCoord.Phone_Num;
+            existingLocCoord.Service_Tags = locCoord.Service_Tags;
             _context.SaveChanges();
         }
 

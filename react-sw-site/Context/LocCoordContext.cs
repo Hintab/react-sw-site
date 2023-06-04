@@ -29,6 +29,19 @@ namespace react_sw_site.Context
                 .Property(e => e.Loc_Name)
                 .IsRequired()
                 .HasMaxLength(255);
+
+            modelBuilder.Entity<LocCoord>()
+                .Property(e => e.Loc_Address)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            modelBuilder.Entity<LocCoord>()
+                .Property(e => e.Phone_Num)
+                .HasMaxLength(50);
+
+            modelBuilder.Entity<LocCoord>()
+                .Property(e => e.Service_Tags)
+                .HasMaxLength(4000);
         }
     }
 }
