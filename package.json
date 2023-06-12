@@ -3,6 +3,7 @@
     "axios": "^1.4.0",
     "google-maps-react": "^2.0.6",
     "react": "^16.14.0",
+    "react-bootstrap": "^2.7.4",
     "react-dom": "^16.14.0",
     "react-places-autocomplete": "^7.3.0"
   }

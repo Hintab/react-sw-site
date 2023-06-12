@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react';
 import Select from 'react-select';
+import { Accordion, Card } from 'react-bootstrap';
 
 const options = [
     { value: 'option1', label: 'Option 1' },
@@ -30,6 +31,20 @@ const TestPage = () => {
                     <span key={option.value}> {option.label},</span>
                 ))}
             </div>
+            <Accordion>
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header>TAB 1</Accordion.Header>
+                    <Accordion.Body>
+                        This is the first tab body
+                    </Accordion.Body>
+                </Accordion.Item>
+                <Accordion.Item eventKey="1">
+                    <Accordion.Header>TAB 2</Accordion.Header>
+                    <Accordion.Body>
+                        This is the second tab body
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
         </div>
     );
 };
