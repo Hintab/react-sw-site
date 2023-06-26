@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import { Accordion, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 const mapStyles = {
-    width: '80%',
-    height: '80%',
+    width: '100%',
+    height: '100%',
 };
 
 export class MapContainer extends Component {
@@ -15,7 +17,9 @@ export class MapContainer extends Component {
         geocoder: null,
         activeAccordionIndex: -1,
         center: { lat: 39.7684, lng: -86.1581 },
+        serviceTags: {}, // Add the serviceTags state variable here
     };
+
 
     componentDidMount() {
         this.setState({ geocoder: new window.google.maps.Geocoder() });
@@ -29,21 +33,44 @@ export class MapContainer extends Component {
             .catch((error) => {
                 console.error('Error:', error);
             });
+
+        // Fetch service names from the cross-reference table
+        fetch('api/ServiceTags')
+            .then((response) => response.json())
+            .then((data) => {
+                const serviceTags = {};
+                data.forEach((tag) => {
+                    serviceTags[tag.id] = tag.service_Name;
+                });
+                this.setState({ serviceTags });
+                console.log(this.state.serviceTags);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
-
     onAccordionHeaderClick = (longitude, latitude, index) => {
-        const newCenter = { lat: latitude, lng: longitude };
-        const { locations } = this.state;
-        const selectedLocation = locations[index];
-        const marker = this.getMarkerByLocation(selectedLocation);
+        if (index === this.state.activeAccordionIndex) {
+            this.setState({
+                activeMarker: null,
+                selectedPlace: null,
+                activeAccordionIndex: -1,
+            });
+        } else {
+            const newCenter = { lat: latitude, lng: longitude };
+            const { locations } = this.state;
+            const selectedLocation = locations[index];
+            const marker = this.getMarkerByLocation(selectedLocation);
 
-        this.setState({
-            activeMarker: marker,
-            selectedPlace: { name: selectedLocation.loc_Name, address: selectedLocation.loc_Address },
-            activeAccordionIndex: index,
-            center: newCenter,
-        });
+            this.setState({
+                activeMarker: marker,
+                selectedPlace: { name: selectedLocation.loc_Name, address: selectedLocation.loc_Address },
+                activeAccordionIndex: index,
+                center: newCenter,
+            });
+        }
     };
+
 
     onMarkerClick = (props, marker) => {
         const { locations } = this.state;
@@ -77,11 +104,13 @@ export class MapContainer extends Component {
             selectedPlace,
             activeAccordionIndex,
             center,
+            serviceTags,
         } = this.state;
 
         return (
-            <div style={{ display: 'flex' }}>
-                <div style={{ flex: '0 0 30%', padding: '10px' }}>
+            <div className="container">
+                <div className="row">
+                    <div className="col-3">
                     <Accordion activeKey={activeAccordionIndex.toString()}>
                         {locations.map((location, index) => (
                             <Card key={index}>
@@ -106,15 +135,19 @@ export class MapContainer extends Component {
                                             <strong>Phone Number:</strong> {location.phone_Num}
                                         </div>
                                         <div>
-                                            <strong>Service Tags:</strong> {location.service_Tags}
+                                            <strong>Service Tags:</strong>{' '}
+                                            {location.service_Tags.split(',').map((tag) => serviceTags[parseInt(tag, 10)]).join(', ')}
+                                        </div>
+                                        <div>
+                                            <Link to={`/EditData/${location.id}`}>Edit</Link>
                                         </div>
                                     </Accordion.Body>
                                 </Accordion.Item>
                             </Card>
                         ))}
                     </Accordion>
-                </div>
-                <div style={{ flex: '1' }}>
+                    </div>
+                <div class="col-lg-8 col-md-11 position-relative map-container">
                     <Map
                         google={google}
                         zoom={11}
@@ -163,10 +196,12 @@ export class MapContainer extends Component {
                         >
                             <div>
                                 <h3>{selectedPlace && selectedPlace.name}</h3>
-                                <p>{selectedPlace && selectedPlace.address}</p>
+                                <h6>{selectedPlace && selectedPlace.address}</h6>
                             </div>
                         </InfoWindow>
-                    </Map>
+                        </Map>
+                    </div>
+
                 </div>
             </div>
         );
@@ -175,5 +210,5 @@ export class MapContainer extends Component {
 
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyDvsWr7a88qVT1KGFdPynD6MAcEA5NvjEw'
+    apiKey: 'AIzaSyAYim6O-QhgNWuL-ZZSQPo-nyLqe4Uvg-c',
 })(MapContainer);
