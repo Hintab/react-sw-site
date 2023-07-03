@@ -139,7 +139,12 @@ export class MapContainer extends Component {
                                             {location.service_Tags.split(',').map((tag) => serviceTags[parseInt(tag, 10)]).join(', ')}
                                         </div>
                                         <div>
-                                            <Link to={`/EditData/${location.id}`}>Edit</Link>
+                                            <div class="col">
+                                                <Link to={`/ContactDetails/${location.id}`}>Details</Link>
+                                            </div>
+                                            <div class="col">
+                                                <Link to={`/EditData/${location.id}`}>Edit</Link>
+                                            </div>
                                         </div>
                                     </Accordion.Body>
                                 </Accordion.Item>

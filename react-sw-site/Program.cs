@@ -16,6 +16,10 @@ builder.Services.AddDbContext<LocCoordContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ReactJSDBConnection"));
 });
+builder.Services.AddDbContext<LocContactDetailsContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ReactJSDBConnection"));
+});
 builder.Services.AddDbContext<ServiceTagsContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ReactJSDBConnection"));

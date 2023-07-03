@@ -89,23 +89,25 @@ const AddServiceTag = () => {
         }
     };
 
+
     return (
-        <div>
+        <div className="container mt-4 mb-4">
             <h2>Add New Service Tag</h2>
-            {successMessage && <div className="success">{successMessage}</div>}
-            {errorMessage && <div className="error">{errorMessage}</div>}
+            {successMessage && <div className="alert alert-success">{successMessage}</div>}
+            {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="serviceName">Service Name:</label>
+                <div className="mb-3">
+                    <label htmlFor="serviceName" className="form-label">Service Name:</label>
                     <input
                         type="text"
                         id="serviceName"
+                        className="form-control"
                         value={serviceName}
                         onChange={handleInputChange}
                         required
                     />
                 </div>
-                <button type="submit">Add Service Tag</button>
+                <button type="submit" className="btn btn-primary">Add Service Tag</button>
             </form>
 
             <h2>All Service Tags</h2>
@@ -114,11 +116,11 @@ const AddServiceTag = () => {
             ) : serviceTags.length === 0 ? (
                 <p>No service tags found.</p>
             ) : (
-                <ul>
+                <ul className="list-group">
                     {serviceTags.map((serviceTag) => (
-                        <li key={serviceTag.ID}>
-                            {serviceTag.service_Name}{' '}
-                            <button onClick={() => handleDelete(serviceTag.ID)}>Delete</button>
+                        <li key={serviceTag.ID} className="list-group-item d-flex justify-content-between align-items-center">
+                            {serviceTag.service_Name}
+                            <button className="btn btn-danger" onClick={() => handleDelete(serviceTag.id)}>Delete</button>
                         </li>
                     ))}
                 </ul>

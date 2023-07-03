@@ -4,6 +4,7 @@ import { Home } from "./components/Home";
 import AutoAddressMap from "./components/InputData";
 import TestPage from "./components/TestPage";
 import ViewData from "./components/ViewData";
+import ContactDetails from "./components/ContactDetails";
 
 const AppRoutes = [
   {
@@ -29,6 +30,10 @@ const AppRoutes = [
   {
       path: '/test2',
       element: <TestPage />
+  },
+  {
+      path: '/ContactDetails/:id',
+      element: <ContactDetails />
   }
 
 ];

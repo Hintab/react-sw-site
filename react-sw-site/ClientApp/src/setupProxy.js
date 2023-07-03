@@ -10,6 +10,7 @@ const context = [
     "/api/Employees",
     "/api/LocCoord",
     "/api/ServiceTags",
+    "/api/LocContactDetails",
 ];
 
 module.exports = function(app) {

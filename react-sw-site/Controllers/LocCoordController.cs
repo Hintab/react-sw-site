@@ -20,8 +20,8 @@ namespace react_sw_site.Controllers
         [HttpGet]
         public async Task<IActionResult> GetLocCoords()
         {
-            var employeess = await _context.LocCoord.ToListAsync();
-            return Ok(employeess);
+            var locCoords = await _context.LocCoord.ToListAsync();
+            return Ok(locCoords);
         }
 
         [HttpGet("{id}")]
