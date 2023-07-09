@@ -7,9 +7,10 @@ namespace react_sw_site.Context
     {
         public DbSet<Employees> Employees { get; set; }
 
-        public EmployeeContext(DbContextOptions<EmployeeContext> context) : base(context)
+        public EmployeeContext(DbContextOptions<EmployeeContext> options) : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employees>()

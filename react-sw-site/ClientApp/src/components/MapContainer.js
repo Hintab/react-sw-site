@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const mapStyles = {
     width: '100%',
-    height: '100%',
+    height: '80vh',
 };
 
 export class MapContainer extends Component {
@@ -28,11 +28,11 @@ export class MapContainer extends Component {
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ locations: data });
-                console.log(this.state.locations);
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
+
 
         // Fetch service names from the cross-reference table
         fetch('api/ServiceTags')
@@ -43,7 +43,6 @@ export class MapContainer extends Component {
                     serviceTags[tag.id] = tag.service_Name;
                 });
                 this.setState({ serviceTags });
-                console.log(this.state.serviceTags);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -139,10 +138,10 @@ export class MapContainer extends Component {
                                             {location.service_Tags.split(',').map((tag) => serviceTags[parseInt(tag, 10)]).join(', ')}
                                         </div>
                                         <div>
-                                            <div class="col">
+                                            <div className="col">
                                                 <Link to={`/ContactDetails/${location.id}`}>Details</Link>
                                             </div>
-                                            <div class="col">
+                                            <div className="col">
                                                 <Link to={`/EditData/${location.id}`}>Edit</Link>
                                             </div>
                                         </div>
@@ -152,7 +151,7 @@ export class MapContainer extends Component {
                         ))}
                     </Accordion>
                     </div>
-                <div class="col-lg-8 col-md-11 position-relative map-container">
+                <div className="col-lg-8 col-md-11 position-relative map-container">
                     <Map
                         google={google}
                         zoom={11}

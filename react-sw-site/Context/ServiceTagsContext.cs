@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using react_sw_site.Models;
 
 namespace react_sw_site.Context
@@ -7,9 +8,10 @@ namespace react_sw_site.Context
     {
         public DbSet<ServiceTags> ServiceTags { get; set; }
 
-        public ServiceTagsContext(DbContextOptions<ServiceTagsContext> context) : base(context)
+        public ServiceTagsContext(DbContextOptions<ServiceTagsContext> options) : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ServiceTags>()
