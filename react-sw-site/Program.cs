@@ -3,15 +3,30 @@ using Microsoft.Extensions.Configuration;
 using Pomelo.EntityFrameworkCore.MySql;
 using react_sw_site.Context;
 using react_sw_site.Models;
+using System.Diagnostics;
 
-string serverName = Environment.GetEnvironmentVariable("SERVER_NAME");
-string databaseName = Environment.GetEnvironmentVariable("DATABASE_NAME");
-string databaseUsername = Environment.GetEnvironmentVariable("DATABASE_USERNAME");
-string databasePassword = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
-
+string databasePassword;
+string serverName;
+string databaseName;
+string databaseUsername;
 // Build the connection string
-string connectionString = $"Server={serverName};Database={databaseName};Uid={databaseUsername};Pwd={databasePassword};";
+if (Debugger.IsAttached)
+{
+    databasePassword = "TestRootPw";
+    serverName = "localhost";
+    databaseName = "sw-site";
+    databaseUsername = "root";
+}
+else 
+{
+    databasePassword = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
+    serverName = Environment.GetEnvironmentVariable("SERVER_NAME");
+    databaseName = Environment.GetEnvironmentVariable("DATABASE_NAME");
+    databaseUsername = Environment.GetEnvironmentVariable("DATABASE_USERNAME");
+}
 
+
+string connectionString = $"Server={serverName};Database={databaseName};Uid={databaseUsername};Pwd={databasePassword};";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
